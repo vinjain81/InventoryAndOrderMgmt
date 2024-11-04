@@ -15,6 +15,7 @@ import com.bgarage.autopartsmgmt.order.dto.OrderRequest;
 import com.bgarage.autopartsmgmt.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -34,6 +35,7 @@ public class AutoPartsInventoryService {
         this.orderService = orderService;
     }
 
+    @Transactional
     public AutoPartsInventoryEntity addAvailableQty(AutoPartsInventoryRequest autoPartsInventoryRequest) {
 
         AutoPartsInventoryRequestValidator.validateRequest(autoPartsInventoryRequest);
@@ -56,6 +58,7 @@ public class AutoPartsInventoryService {
         return updatedAutoPartsInventoryEntity;
     }
 
+    @Transactional
     public AutoPartsInventoryEntity updateAvailableQty(Integer id, Integer availableQty) {
 
         boolean isAutoPartExist = autoPartsInventoryRepository.existsById(id);

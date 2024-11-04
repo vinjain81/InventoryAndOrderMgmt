@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class AutoPartsService
         this.autoPartsRepository = autoPartsRepository;
     }
 
+    @Transactional
     public AutoPartEntity addPart(AutoPartRequest autoPartRequest)
     {
         AutoPartRequestValidator.validateRequest(autoPartRequest);
@@ -40,6 +42,7 @@ public class AutoPartsService
         }
     }
 
+    @Transactional
     public AutoPartEntity updatePart(Integer id, AutoPartRequest autoPartRequest)
     {
         AutoPartRequestValidator.validateRequest(autoPartRequest);

@@ -6,10 +6,9 @@ import com.bgarage.autopartsmgmt.order.model.OrderEntity;
 import com.bgarage.autopartsmgmt.order.model.OrderQueueEntity;
 import com.bgarage.autopartsmgmt.order.repository.OrderQueueRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +27,7 @@ public class OrderScheduler {
 
     //At 12:30 AM every day orders will be checked in queue and submitted
     @Scheduled(cron = "0 30 0 * * *")
+    @Transactional
     public void placeScheduledOrders() {
 
         log.info("Daily schedule triggered to move queued orders to order book.");

@@ -17,6 +17,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class OrderService {
         this.autoPartsRepository = autoPartsRepository;
     }
 
+    @Transactional
     public OrderResponse placeOrder(OrderRequest orderRequest) {
 
         OrderResponse orderResponse = OrderResponse.builder().build();
@@ -61,6 +63,7 @@ public class OrderService {
         return orderResponse;
     }
 
+    @Transactional
     public void placeOrdersFromQueue(OrderEntity orderEntity, List<OrderDetailsEntity> orderDetailsEntities) {
 
         log.info("Moving orders from queue to order book.");
